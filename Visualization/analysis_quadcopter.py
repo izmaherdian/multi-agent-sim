@@ -12,13 +12,13 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme2'
+obstacle_scheme = 'scheme1'
 # wind_type       = multi_agent_config.WIND_TYPE
-wind_type       = 'GUST'
+wind_type       = 'NONE'
 # controller_type = multi_agent_config.CONTROLLER
-controller_type = 'erc'  
+controller_type = 'iapf'  
 # formation_type  = multi_agent_config.FORMATION_TYPE
-formation_type  = 2
+formation_type  = 1
 orient          = multi_agent_config.ORIENT
 
 with open(f'multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
@@ -137,7 +137,11 @@ def plot_paths(data_quad):
     import matplotlib.pyplot as plt
     import numpy as np
 
-    plt.figure(figsize=(10, 6))
+    # 174 mm = 6.85 inches (at 72 dpi)
+    plt.figure(figsize=(6.85, 2.85))
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['font.size'] = 10
+    
     obstacles = Obstacles(scheme=obstacle_scheme)
     obstacles_2d = obstacles.obstacles_2d
 
@@ -149,7 +153,7 @@ def plot_paths(data_quad):
     for i in range(len(obstacles_2d)):
         obstacle = obstacles_2d[i]
         if i == 0:
-            plt.fill(obstacle[:, 0], obstacle[:, 1], alpha=0.3, color='grey', label='Rintangan')
+            plt.fill(obstacle[:, 0], obstacle[:, 1], alpha=0.3, color='grey', label='Obstacle')
         else:
             plt.fill(obstacle[:, 0], obstacle[:, 1], alpha=0.3, color='grey')
 
@@ -173,7 +177,7 @@ def plot_paths(data_quad):
             idx = (np.abs(t - tm)).argmin()
             cx, cy = get_circle(x[idx], y[idx], 0.15)
             plt.plot(cx, cy, color=color, linewidth=1.2, alpha=1.0)
-            # plt.text(x[idx], y[idx], f'{int(tm)}s', fontsize=7, ha='center', va='center', color='black')
+            # plt.text(x[idx], y[idx], f'{int(tm)}s', fontsize=12, ha='center', va='center', color='black')
 
     # Garis koneksi antar agen pada waktu tertentu saja
     for tm in time_marks:
@@ -191,14 +195,14 @@ def plot_paths(data_quad):
                 plt.plot([xs[i], xs[j]], [ys[i], ys[j]], 'k--', linewidth=1.0, alpha=1.0)
 
     # Plot akhir
-    plt.axis('scaled')
+    plt.axis('equal')
     plt.xlim((-7, 25))
-    plt.ylim((-3, 9))   
-    plt.xlabel('X Posisi (m)')
-    plt.ylabel('Y Posisi (m)')
-    plt.title(f'Lintasan Kawanan\nObs: {obstacle_scheme} - Wind: {wind_type} - Contr: {controller_type}\nFormation: {formation_type} - Orient: {orient}')
+    plt.ylim((-3, 7))   
+    plt.xlabel('X Position (m)', fontsize=12)
+    plt.ylabel('Y Position (m)', fontsize=12)
+    # plt.title(f'Swarm Trajectory\nObs: {obstacle_scheme} - Wind: {wind_type} - Contr: {controller_type}\nFormation: {formation_type} - Orient: {orient}', fontsize=12)
     plt.grid()
-    plt.legend()
+    plt.legend(fontsize=12, ncols=3) 
     plt.tight_layout()
     plt.show()
 
@@ -212,7 +216,9 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
     mode_history = data_agent[0]['path'][:, 7]
     colors = ['tab:blue', 'tab:orange', 'tab:green', 'tab:red', 'tab:purple']
 
-    fig, ax = plt.subplots(figsize=(15, 7))
+    fig, ax = plt.subplots(figsize=(6.85, 2.85))
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['font.size'] = 10
 
     # --- Plot garis kecepatan untuk setiap agen ---
     quad_handles = []
@@ -224,9 +230,9 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
 
     # --- Tambahkan latar belakang warna per mode ---
     mode_colors = {
-        -1: {'color': '#007acc', 'label': 'Takeoff'},
-         0: {'color': '#ff7f0e', 'label': 'Formation'},
-         1: {'color': '#2ca02c', 'label': 'Tailgating'}
+        -1: {'color': "#7aa1ba", 'label': 'Takeoff'},
+         0: {'color': "#f9d7b9", 'label': 'Formation'},
+         1: {'color': "#a4c1a4", 'label': 'Tailgating'}
     }
 
     mode_handles = []
@@ -254,13 +260,13 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
         patch = mpatches.Patch(color=mode_info['color'], alpha=0.2, label=mode_info['label'])
         mode_handles.append(patch)
 
-    # --- Pengaturan plot ---
-    ax.set_xlabel('Waktu (s)', fontsize=12)
-    ax.set_ylabel('Kecepatan (m/s)', fontsize=12)
-    ax.set_title(f'Kecepatan Kawanan Berdasarkan Mode\n'
-                 f'Obs: {plot_info.get("obstacle_scheme", "N/A")}, '
-                 f'Wind: {plot_info.get("wind_type", "N/A")}, '
-                 f'Contr: {plot_info.get("controller_type", "N/A")}', fontsize=14)
+    # --- Plot settings ---
+    ax.set_xlabel('Time (s)', fontsize=12)
+    ax.set_ylabel('Speed (m/s)', fontsize=12)
+    # ax.set_title(f'Swarm Speed per Mode\n'
+    #              f'Obs: {plot_info.get("obstacle_scheme", "N/A")}, '
+    #              f'Wind: {plot_info.get("wind_type", "N/A")}, '
+    #              f'Contr: {plot_info.get("controller_type", "N/A")}', fontsize=12)
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time[0], time[-1])
     ax.set_ylim(bottom=0)
@@ -268,7 +274,7 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
     # --- Gabungkan legend mode + quad dalam satu blok ---
     combined_handles = mode_handles + quad_handles
     combined_labels = [h.get_label() for h in combined_handles]
-    ax.legend(combined_handles, combined_labels, loc='upper right', fontsize=10)
+    ax.legend(combined_handles, combined_labels, loc='upper right', ncol=4, fontsize=12)
 
     plt.tight_layout()
     plt.show()
@@ -643,14 +649,16 @@ def plot_RMSE_total(data_quad, data_agent, topology, config, **plot_info):
 
     scalar_rmse = np.mean(total_rmse)
 
-    fig, ax = plt.subplots(figsize=(15, 7))
-    line_rmse, = ax.plot(time, total_rmse, 'k-', label='RMSE Operasional (m)', linewidth=2.5)
+    fig, ax = plt.subplots(figsize=(6.85, 2.85))
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['font.size'] = 10
+    line_rmse, = ax.plot(time, total_rmse, 'k-', label='Operational RMSE (m)', linewidth=2.0)
 
     # Background warna
     mode_colors = {
-        -1: {'color': '#007acc', 'label': 'Takeoff'},
-         0: {'color': '#ff7f0e', 'label': 'Formation'},
-         1: {'color': '#2ca02c', 'label': 'Tailgating'}
+        -1: {'color': "#7aa1ba", 'label': 'Takeoff'},
+         0: {'color': "#f9d7b9", 'label': 'Formation'},
+         1: {'color': "#a4c1a4", 'label': 'Tailgating'}
     }
 
     current_mode = mode_history[0]
@@ -680,21 +688,21 @@ def plot_RMSE_total(data_quad, data_agent, topology, config, **plot_info):
         patch = mpatches.Patch(color=mode_info['color'], alpha=0.2, label=label)
         mode_patches.append(patch)
 
-    ax.set_xlabel('Waktu (s)', fontsize=12)
-    ax.set_ylabel('RMSE (meter)', fontsize=12)
-    ax.set_title(
-        f"RMSE Akurasi Operasional Berdasarkan Mode\n"
-        f"$\\bf{{\\overline{{RMSE}}_{{total}} = {scalar_rmse:.3f}}}$ meter\n"
-        f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, Wind: {plot_info.get('wind_type', 'N/A')}, Contr: {plot_info.get('controller_type', 'N/A')}",
-        fontsize=14
-    )
+    ax.set_xlabel('Time (s)', fontsize=12)
+    ax.set_ylabel('RMSE (meters)', fontsize=12)
+    # ax.set_title(
+    #     f"Operational Accuracy RMSE by Mode\n"
+    #     f"$\\bf{{\\overline{{RMSE}}_{{total}} = {scalar_rmse:.3f}}}$ meters\n"
+    #     f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, Wind: {plot_info.get('wind_type', 'N/A')}, Contr: {plot_info.get('controller_type', 'N/A')}",
+    #     fontsize=12
+    # )
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time[0], time[-1])
-    ax.set_ylim(bottom=0)
+    ax.set_ylim(bottom=-0.1)
 
     # Gabungkan legend
     handles = mode_patches + [line_rmse]
-    ax.legend(handles=handles, loc='upper right', fontsize=10)
+    ax.legend(handles=handles, loc='upper right', fontsize=12)
 
     plt.tight_layout()
     plt.show()
@@ -724,14 +732,16 @@ def plot_order_total(data_quad, data_agent, config, **plot_info):
     avg_phi = np.mean(phi_array)
 
     # Setup plot
-    fig, ax = plt.subplots(figsize=(15, 7))
-    ax.plot(time_order, phi_array, 'k-', linewidth=2.0, label='Indeks Keteraturan ($\\Phi$)')
+    fig, ax = plt.subplots(figsize=(6.85, 2.85))
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['font.size'] = 10
+    ax.plot(time_order, phi_array, 'k-', linewidth=2.0, label='Order Index ($\\Phi$)')
 
     # --- Background warna berdasarkan mode ---
     mode_colors = {
-        -1: {'color': '#007acc', 'label': 'Takeoff'},
-         0: {'color': '#ff7f0e', 'label': 'Formation'},
-         1: {'color': '#2ca02c', 'label': 'Tailgating'}
+        -1: {'color': "#7aa1ba", 'label': 'Takeoff'},
+         0: {'color': "#f9d7b9", 'label': 'Formation'},
+         1: {'color': "#a4c1a4", 'label': 'Tailgating'}
     }
 
     current_mode = mode_history[1]  # karena time_order dimulai dari indeks 1
@@ -761,25 +771,25 @@ def plot_order_total(data_quad, data_agent, config, **plot_info):
         patch = mpatches.Patch(color=mode_info['color'], alpha=0.2, label=label)
         mode_handles.append(patch)
 
-    # Finalisasi
-    ax.set_xlabel("Waktu (s)", fontsize=12)
-    ax.set_ylabel("Indeks Keteraturan ($\\Phi$)", fontsize=12)
-    ax.set_title(
-        f"Indeks Keteraturan Sistem Berdasarkan Mode\n"
-        f"$\\bf{{\\overline{{\\Phi}} = {avg_phi:.3f}}}$\n"
-        f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, "
-        f"Wind: {plot_info.get('wind_type', 'N/A')}, "
-        f"Contr: {plot_info.get('controller_type', 'N/A')}",
-        fontsize=14
-    )
+    # Finalize
+    ax.set_xlabel("Time (s)", fontsize=12)
+    ax.set_ylabel("Order Index ($\\Phi$)", fontsize=12)
+    # ax.set_title(
+    #     f"System Order Index by Mode\n"
+    #     f"$\\bf{{\\overline{{\\Phi}} = {avg_phi:.3f}}}$\n"
+    #     f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, "
+    #     f"Wind: {plot_info.get('wind_type', 'N/A')}, "
+    #     f"Contr: {plot_info.get('controller_type', 'N/A')}",
+    #     fontsize=12
+    # )
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time_order[0], time_order[-1])
     ax.set_ylim(0, 1.05)
 
-    # Legend: mode (blok) + garis Phi
-    phi_line = plt.Line2D([], [], color='k', linewidth=2.0, label='Indeks Keteraturan ($\\Phi$)')
+    # Legend: mode (blocks) + Phi line
+    phi_line = plt.Line2D([], [], color='k', linewidth=2.0, label='Order Index ($\\Phi$)')
     handles = mode_handles + [phi_line]
-    ax.legend(handles=handles, loc='upper right', fontsize=10)
+    ax.legend(handles=handles, loc='lower right', fontsize=12)
 
     plt.tight_layout()
     plt.show()
@@ -792,35 +802,35 @@ multi_agent_config.set_num_robot(num_robot)
 topology = multi_agent_config.TOPOLOGY
 
 # --- Contoh Cara Pemanggilan Fungsi ---
-# plot_RMSE_total(
-#     data_quad, 
-#     data_agent,
-#     topology, 
-#     multi_agent_config,
-#     obstacle_scheme=obstacle_scheme, 
-#     wind_type=wind_type,
-#     controller_type=controller_type,
-# )
-# plot_order_total(
-#     data_quad, 
-#     data_agent, 
-#     multi_agent_config,
-#     obstacle_scheme=obstacle_scheme, 
-#     wind_type=wind_type, 
-#     controller_type=controller_type
-# )
+plot_RMSE_total(
+    data_quad, 
+    data_agent,
+    topology, 
+    multi_agent_config,
+    obstacle_scheme=obstacle_scheme, 
+    wind_type=wind_type,
+    controller_type=controller_type,
+)
+plot_order_total(
+    data_quad, 
+    data_agent, 
+    multi_agent_config,
+    obstacle_scheme=obstacle_scheme, 
+    wind_type=wind_type, 
+    controller_type=controller_type
+)
 
 
-# plot_paths(data_quad)
+plot_paths(data_quad)
 # plot_formation_error(data_quad)
-# plot_speed_per_mode(
-#     data_quad, 
-#     data_agent, 
-#     multi_agent_config,
-#     obstacle_scheme=obstacle_scheme, 
-#     wind_type=wind_type, 
-#     controller_type=controller_type
-# )
+plot_speed_per_mode(
+    data_quad, 
+    data_agent, 
+    multi_agent_config,
+    obstacle_scheme=obstacle_scheme, 
+    wind_type=wind_type, 
+    controller_type=controller_type
+)
 # plot_order(data_quad)
 
 # ----------------------------------------------------------
