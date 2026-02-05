@@ -132,6 +132,7 @@ def plot_mode(data):
     ax2.tick_params(bottom=False, labelbottom=False)
 
     plt.xlim([0, path[-1, 0]])
+    ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_ylim([0, len(data)])
     ax2.set_ylim(-0.1, 1.1)
 

@@ -185,7 +185,11 @@ def plot_control_effort_comparison_with_mode(data_erc_none, data_erc_gust, data_
     if plot_info is None:
         plot_info = {}
 
-    # Hitung data untuk kedua skenario
+    # Set font to Arial, size 12
+    plt.rcParams['font.family'] = 'Arial'
+    plt.rcParams['font.size'] = 12
+
+    # Calculate data for both scenarios
     time_no_wind, effort_no_wind = _calculate_average_effort(data_erc_none)
     time_wind, effort_wind = _calculate_average_effort(data_erc_gust)
 
@@ -194,13 +198,13 @@ def plot_control_effort_comparison_with_mode(data_erc_none, data_erc_gust, data_
 
     # Warna dan label untuk setiap mode
     mode_colors = {
-        -1: {'color': '#007acc', 'label': 'Takeoff'},
-         0: {'color': '#ff7f0e', 'label': 'Formation'},
-         1: {'color': '#2ca02c', 'label': 'Tailgating'}
+        -1: {'color': '#7aa1ba', 'label': 'Takeoff'},
+         0: {'color': '#f9d7b9', 'label': 'Formation'},
+         1: {'color': '#a4c1a4', 'label': 'Tailgating'}
     }
 
     # Buat plot
-    fig, ax = plt.subplots(figsize=(12, 6))
+    fig, ax = plt.subplots(figsize=(6.85, 2.85))
 
     # Tambahkan blok warna mode
     current_mode = mode_history[0]
@@ -228,20 +232,20 @@ def plot_control_effort_comparison_with_mode(data_erc_none, data_erc_gust, data_
         patch = mpatches.Patch(color=info['color'], alpha=0.2, label=info['label'])
         mode_patches.append(patch)
 
-    # Plot kurva kontrol effort
-    line1, = ax.plot(time_no_wind, effort_no_wind, label='Tanpa Gangguan Angin', color='b')
-    line2, = ax.plot(time_wind, effort_wind, label='Dengan Gangguan Angin (GUST)', color='r')
+    # Plot control effort curves
+    line1, = ax.plot(time_no_wind, effort_no_wind, label='Without Wind Disturbance', color='b')
+    line2, = ax.plot(time_wind, effort_wind, label='With Wind Disturbance (GUST)', color='r')
 
-    # Label dan dekorasi
-    ax.set_xlabel("Waktu (s)")
-    ax.set_ylabel("Rata-Rata Usaha Kontrol (Σ wM²)")
-    ax.set_title(f'Perbandingan Usaha Kontrol\nObs: {plot_info.get("obstacle_scheme", "N/A")} - Wind: {plot_info.get("wind_type", "N/A")} - Contr: {plot_info.get("controller_type", "N/A")}\nFormation: {plot_info.get("formation_type", "N/A")} - Orient: {plot_info.get("orient", "N/A")}')
+    # Labels and decoration
+    ax.set_xlabel("Time (s)", fontsize=12, fontname='Arial')
+    ax.set_ylabel("Average Control Effort (Σ wM²)", fontsize=12, fontname='Arial')
+    # ax.set_title(f'Control Effort Comparison\nObs: {plot_info.get("obstacle_scheme", "N/A")} - Wind: {plot_info.get("wind_type", "N/A")} - Contr: {plot_info.get("controller_type", "N/A")}\nFormation: {plot_info.get("formation_type", "N/A")} - Orient: {plot_info.get("orient", "N/A")}', fontsize=12, fontname='Arial')
     ax.grid(True)
     ax.set_xlim(time_no_wind[0], time_no_wind[-1])
 
     # Gabungkan legenda
     handles = mode_patches + [line1, line2]
-    ax.legend(handles=handles, loc='upper right')
+    ax.legend(handles=handles, loc='upper right', fontsize=12, ncol=2)
 
     plt.tight_layout()
     plt.show()
