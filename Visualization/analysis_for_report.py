@@ -12,9 +12,9 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme2' 
+obstacle_scheme = 'scheme2'
 # wind_type       = multi_agent_config.WIND_TYPE
-wind_type       = 'GUST'
+wind_type       = 'NONE'
 # controller_type = multi_agent_config.CONTROLLER
 controller_type = 'erc'  
 # formation_type  = multi_agent_config.FORMATION_TYPE
@@ -176,6 +176,7 @@ def _calculate_average_effort(data):
     return time_vector, average_effort
 
 import matplotlib.patches as mpatches
+
 def plot_control_effort_comparison_with_mode(data_erc_none, data_erc_gust, data_agent, plot_info=None):
     """
     Mem-plot perbandingan usaha kontrol rata-rata antara dua skenario,

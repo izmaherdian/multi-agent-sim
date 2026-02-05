@@ -532,21 +532,21 @@ def main_multi_agent():
             })
 
 
-    file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
-    file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
+    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
+    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
     
-    import pickle
-    with open(file_name_agent, 'wb') as f:
-        pickle.dump({
-            'data_agent': data_agent
-        }, f)
-    print(f"Data saved to {file_name_agent}")
+    # import pickle
+    # with open(file_name_agent, 'wb') as f:
+    #     pickle.dump({
+    #         'data_agent': data_agent
+    #     }, f)
+    # print(f"Data saved to {file_name_agent}")
 
-    with open(file_name_quad, 'wb') as f:
-        pickle.dump({
-            'data_quad': data_quad
-        }, f)
-    print(f"Data saved to {file_name_quad}")
+    # with open(file_name_quad, 'wb') as f:
+    #     pickle.dump({
+    #         'data_quad': data_quad
+    #     }, f)
+    # print(f"Data saved to {file_name_quad}")
 
 if __name__ == "__main__":
     # main()

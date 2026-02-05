@@ -17,7 +17,7 @@ wind_type       = 'GUST'
 # controller_type = multi_agent_config.CONTROLLER
 controller_type = 'erc'
 # formation_type  = multi_agent_config.FORMATION_TYPE
-formation_type  = 2
+formation_type  = 1
 orient          = multi_agent_config.ORIENT
 
 with open(f'multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
@@ -53,19 +53,36 @@ def plot_paths(data):
     plt.show()
 
 def plot_speed(data):
-    plt.figure(figsize=(10, 6))
+    fig = plt.figure(figsize=(10, 6))
+    ax = fig.add_subplot(111)
+    path = data[0]['path']
+    size = 10
+    x = np.arange(0, path.shape[0], size)
+
+    num_formation = np.zeros_like(path[:, 0])
+    num_tailgating = np.zeros_like(path[:, 0])
+    num_takeoff = np.zeros_like(path[:, 0])
 
     for i in range(len(data)):
+        num_formation += (data[i]['path'][:, 7] == 0)
+        num_tailgating += (data[i]['path'][:, 7] == 1)
+        num_takeoff += (data[i]['path'][:, 7] == -1)
+
         path = data[i]['path']
         t = path[:, 0]
         speed = (path[:, 4]**2 + path[:, 5]**2 + path[:, 6]**2)**0.5
         plt.plot(t, speed, label=f'Agent {i+1}', linewidth=1.5)
     
-    plt.xlabel('Time (s)')
-    plt.ylabel('Speed (m/s)')
-    plt.title('Agent Speed Over Time')
-    plt.grid()
-    plt.legend()
+    num_formation = num_formation[x]
+    num_tailgating = num_tailgating[x]
+    num_takeoff = num_takeoff[x]
+    
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Speed (m/s)')
+
+    ax.set_title('Agent Speed Over Time')
+    ax.grid()
+    ax.legend()
     plt.tight_layout()
     plt.show()
 
@@ -145,6 +162,6 @@ def plot_order(data):
     plt.show()
 
 # plot_paths(data)
-# plot_speed(data)
-plot_mode(data)
+plot_speed(data)
+# plot_mode(data)
 # plot_order(data)

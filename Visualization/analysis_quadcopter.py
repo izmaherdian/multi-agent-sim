@@ -826,11 +826,11 @@ topology = multi_agent_config.TOPOLOGY
 # ----------------------------------------------------------
 # Loop melalui seluruh elemen data_quad_quad
 # ----------------------------------------------------------
-if len(data_quad) == 0:
-    print("Tidak ada data_quad_quad untuk diplot.")
-else:
-    for entry in data_quad:
-        quad_id = entry.get('id', None)
-        arr_quad = entry['path']
-        print(f"Plotting data_quad for quadcopter {quad_id}")
-        plot_quad_data_quad(arr_quad, quad_id)
+# if len(data_quad) == 0:
+#     print("Tidak ada data_quad_quad untuk diplot.")
+# else:
+#     for entry in data_quad:
+#         quad_id = entry.get('id', None)
+#         arr_quad = entry['path']
+#         print(f"Plotting data_quad for quadcopter {quad_id}")
+#         plot_quad_data_quad(arr_quad, quad_id)
