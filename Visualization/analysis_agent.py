@@ -87,7 +87,8 @@ def plot_speed(data):
     plt.show()
 
 def plot_mode(data):
-    fig = plt.figure(figsize=(10, 6))
+    plt.rcParams.update({'font.family': 'Arial', 'font.size': 12})
+    fig = plt.figure(figsize=(6.85, 2.85))
     ax = fig.add_subplot(111, label='1')
     ax2 = fig.add_subplot(111, label='2', frame_on=False)
     size = 10
@@ -115,16 +116,16 @@ def plot_mode(data):
     scales = np.array(scales).T
 
     # Gunakan warna yang konsisten
-    ax.bar(path[:, 0][x], num_takeoff, label="Takeoff", color='#cee5f5')
-    ax.bar(path[:, 0][x], num_formation, label="Formation", color='#ffe5cf')
-    ax.bar(path[:, 0][x], num_tailgating, label="Tailgating", color='#d5edd5')
+    ax.bar(path[:, 0][x], num_takeoff, label="Takeoff", color='#7aa1ba')
+    ax.bar(path[:, 0][x], num_formation, label="Formation", color='#f9d7b9')
+    ax.bar(path[:, 0][x], num_tailgating, label="Tailgating", color='#a4c1a4')
 
     ax2.fill_between(path[:, 0][x], np.min(scales, axis=1)[x], np.max(scales, axis=1)[x], color="k", label="Max/Min", alpha=0.3)
-    ax2.plot(path[:, 0][x], np.mean(scales, axis=1)[x], 'k-', label="Rata-rata")
+    ax2.plot(path[:, 0][x], np.mean(scales, axis=1)[x], 'k-', label="Mean")
 
-    ax.set_xlabel("Waktu (s)")
-    ax.set_ylabel("Jumlah Agen")
-    ax2.set_ylabel("Faktor Skala")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Number of Agents")
+    ax2.set_ylabel("Scale Factor")
 
     ax2.yaxis.tick_right()
     ax2.yaxis.set_label_position('right')
@@ -135,9 +136,9 @@ def plot_mode(data):
     ax2.set_ylim(-0.1, 1.1)
 
     plt.tight_layout()
-    ax.legend(loc='upper left')
-    ax2.legend(loc='upper right')
-    plt.title("Mode Agen dan Faktor Skala")
+    ax.legend(loc='lower left')
+    ax2.legend(loc='lower right')
+    # plt.title("Agent Modes and Scale Factor")
     plt.show()
 
 
@@ -162,6 +163,6 @@ def plot_order(data):
     plt.show()
 
 # plot_paths(data)
-plot_speed(data)
-# plot_mode(data)
+# plot_speed(data)
+plot_mode(data)
 # plot_order(data)
