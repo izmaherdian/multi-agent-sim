@@ -12,7 +12,7 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme2'
+obstacle_scheme = 'scheme3'
 # wind_type       = multi_agent_config.WIND_TYPE
 wind_type       = 'GUST'
 # controller_type = multi_agent_config.CONTROLLER
@@ -137,10 +137,10 @@ def plot_paths(data_quad):
     import matplotlib.pyplot as plt
     import numpy as np
 
-    # 174 mm = 6.85 inches (at 72 dpi)
-    plt.figure(figsize=(6.85, 2.85))
+    # 174 mm = 6.85 inches (at 72 dpi) 2.85
+    plt.figure(figsize=(4.85, 2.85))
     plt.rcParams['font.family'] = 'Arial'
-    plt.rcParams['font.size'] = 10
+    plt.rcParams['font.size'] = 12
     
     obstacles = Obstacles(scheme=obstacle_scheme)
     obstacles_2d = obstacles.obstacles_2d
@@ -195,14 +195,16 @@ def plot_paths(data_quad):
                 plt.plot([xs[i], xs[j]], [ys[i], ys[j]], 'k--', linewidth=1.0, alpha=1.0)
 
     # Plot akhir
-    plt.axis('equal')
-    plt.xlim((-7, 25))
-    plt.ylim((-3, 7))   
+    plt.axis('scaled')
+    # plt.xlim((-7, 25))
+    # plt.ylim((-3, 7))   
+    plt.xlim((-7, 15))
+    plt.ylim((-6, 6))
     plt.xlabel('X Position (m)', fontsize=12)
     plt.ylabel('Y Position (m)', fontsize=12)
     # plt.title(f'Swarm Trajectory\nObs: {obstacle_scheme} - Wind: {wind_type} - Contr: {controller_type}\nFormation: {formation_type} - Orient: {orient}', fontsize=12)
     plt.grid()
-    plt.legend(fontsize=12, ncols=3) 
+    plt.legend(fontsize=12, ncols=1, loc='lower right') 
     plt.tight_layout()
     plt.show()
 
