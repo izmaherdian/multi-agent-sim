@@ -12,11 +12,11 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme3'
+obstacle_scheme = 'scheme1'
 # wind_type       = multi_agent_config.WIND_TYPE
-wind_type       = 'GUST'
+wind_type       = 'NONE'
 # controller_type = multi_agent_config.CONTROLLER
-controller_type = 'erc'  
+controller_type = 'iapf'  
 # formation_type  = multi_agent_config.FORMATION_TYPE
 formation_type  = 1
 orient          = multi_agent_config.ORIENT
@@ -138,7 +138,7 @@ def plot_paths(data_quad):
     import numpy as np
 
     # 174 mm = 6.85 inches (at 72 dpi) 2.85
-    plt.figure(figsize=(4.85, 2.85))
+    plt.figure(figsize=(6.85, 2.85))
     plt.rcParams['font.family'] = 'Arial'
     plt.rcParams['font.size'] = 12
     
@@ -195,16 +195,21 @@ def plot_paths(data_quad):
                 plt.plot([xs[i], xs[j]], [ys[i], ys[j]], 'k--', linewidth=1.0, alpha=1.0)
 
     # Plot akhir
-    plt.axis('scaled')
-    # plt.xlim((-7, 25))
-    # plt.ylim((-3, 7))   
-    plt.xlim((-7, 15))
-    plt.ylim((-6, 6))
+    plt.axis('equal')
+    plt.xlim((-7, 25))
+    plt.ylim((-3, 7))   
+    # plt.xlim((-7, 15))
+    # plt.ylim((-6, 6))
     plt.xlabel('X Position (m)', fontsize=12)
     plt.ylabel('Y Position (m)', fontsize=12)
     # plt.title(f'Swarm Trajectory\nObs: {obstacle_scheme} - Wind: {wind_type} - Contr: {controller_type}\nFormation: {formation_type} - Orient: {orient}', fontsize=12)
     plt.grid()
-    plt.legend(fontsize=12, ncols=1, loc='lower right') 
+    plt.legend(fontsize=10, ncols=3, loc='lower right')
+    ax = plt.gca()
+    textstr = f'Total Time: {t_max:.3f}s'
+    ax.text(0.98, 0.90, textstr, transform=ax.transAxes, fontsize=10,
+            verticalalignment='top', horizontalalignment='right',
+            bbox=dict(boxstyle='round', facecolor='lightgray'))
     plt.tight_layout()
     plt.show()
 
@@ -804,35 +809,35 @@ multi_agent_config.set_num_robot(num_robot)
 topology = multi_agent_config.TOPOLOGY
 
 # --- Contoh Cara Pemanggilan Fungsi ---
-plot_RMSE_total(
-    data_quad, 
-    data_agent,
-    topology, 
-    multi_agent_config,
-    obstacle_scheme=obstacle_scheme, 
-    wind_type=wind_type,
-    controller_type=controller_type,
-)
-plot_order_total(
-    data_quad, 
-    data_agent, 
-    multi_agent_config,
-    obstacle_scheme=obstacle_scheme, 
-    wind_type=wind_type, 
-    controller_type=controller_type
-)
+# plot_RMSE_total(
+#     data_quad, 
+#     data_agent,
+#     topology, 
+#     multi_agent_config,
+#     obstacle_scheme=obstacle_scheme, 
+#     wind_type=wind_type,
+#     controller_type=controller_type,
+# )
+# plot_order_total(
+#     data_quad, 
+#     data_agent, 
+#     multi_agent_config,
+#     obstacle_scheme=obstacle_scheme, 
+#     wind_type=wind_type, 
+#     controller_type=controller_type
+# )
 
 
 plot_paths(data_quad)
 # plot_formation_error(data_quad)
-plot_speed_per_mode(
-    data_quad, 
-    data_agent, 
-    multi_agent_config,
-    obstacle_scheme=obstacle_scheme, 
-    wind_type=wind_type, 
-    controller_type=controller_type
-)
+# plot_speed_per_mode(
+#     data_quad, 
+#     data_agent, 
+#     multi_agent_config,
+#     obstacle_scheme=obstacle_scheme, 
+#     wind_type=wind_type, 
+#     controller_type=controller_type
+# )
 # plot_order(data_quad)
 
 # ----------------------------------------------------------

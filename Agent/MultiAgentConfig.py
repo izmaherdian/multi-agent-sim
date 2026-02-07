@@ -30,8 +30,8 @@ class MultiAgentConfig:
         self.PATH_TYPE          = 'goal' # or goal, multi-goal, circular
 
         # Parameter untuk 'goal'
-        self.XGOAL = 22.0
-        self.YGOAL = 3.0
+        self.XGOAL = 6 # 22.0
+        self.YGOAL = 3 # 3.0
         self.ZGOAL = -5.0
 
         # Parameter untuk 'multi-goal'
@@ -50,8 +50,8 @@ class MultiAgentConfig:
         self.CIRCLE_RADIUS = 4.0                         # Radius lingkaran
         self.LOOK_AHEAD_DISTANCE = 0.5         # Jarak pandang ke depan
 
-        self.OBSTACLE_SCHEME    = 'scheme1' 
-        self.WIND_TYPE          = 'NONE' 
+        self.OBSTACLE_SCHEME    = 'scheme2' 
+        self.WIND_TYPE          = 'GUST' 
         self.CONTROLLER         = 'erc' 
         self.FORMATION_TYPE     = 1 
         self.ORIENT             = "NED"

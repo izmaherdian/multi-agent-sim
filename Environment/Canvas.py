@@ -103,8 +103,9 @@ class Canvas:
 
         self.ax.set_title(
                 f'3D Environment\n'
-                f'Obs: {self.obstacle_scheme} - Wind: {self.wind_type} - Contr: {self.controller_type}\n'
-                f'Formation: {self.formation_type} - Orient: {self.orient} - Time: {t:.2f}s',
+                f'Controller: {self.controller_type} - Formation: {self.formation_type} - Time: {t:.3f}s',
+                # f'Obs: {self.obstacle_scheme} - Wind: {self.wind_type} - Contr: {self.controller_type}\n'
+                # f'Formation: {self.formation_type} - Orient: {self.orient} - Time: {t:.2f}s',
                 fontsize=10, 
                 fontname='Arial',
                 )

@@ -325,7 +325,7 @@ def main_multi_agent():
     canvas.fig.canvas.mpl_connect('close_event', on_close)
 
     save_video = multi_agent_config.SAVE_VIDEO  
-    video_filename = f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.mp4"
+    video_filename = f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.mp4"
     video_fps = int(1 / frame_time)
 
     if save_video:
@@ -532,8 +532,8 @@ def main_multi_agent():
             })
 
 
-    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
-    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_15.pkl"
+    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.pkl"
+    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.pkl"
     
     # import pickle
     # with open(file_name_agent, 'wb') as f:

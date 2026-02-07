@@ -369,7 +369,6 @@ class QuadDynamics:
         prev_omega = self.omega
 
         self.integrator.set_f_params(cmd, wind)
-        print(f"DEBUG: t={type(t)}, t+Ts={type(t+Ts)}, state={type(self.state)}")
         self.state = self.integrator.integrate(t, t+Ts)
 
         self.pos   = self.state[0:3]
