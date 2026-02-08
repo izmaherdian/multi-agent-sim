@@ -12,11 +12,11 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme1'
+obstacle_scheme = 'scheme2'
 # wind_type       = multi_agent_config.WIND_TYPE
-wind_type       = 'NONE'
+wind_type       = 'GUST'
 # controller_type = multi_agent_config.CONTROLLER
-controller_type = 'iapf'  
+controller_type = 'erc'  
 # formation_type  = multi_agent_config.FORMATION_TYPE
 formation_type  = 1
 orient          = multi_agent_config.ORIENT
@@ -138,7 +138,7 @@ def plot_paths(data_quad):
     import numpy as np
 
     # 174 mm = 6.85 inches (at 72 dpi) 2.85
-    plt.figure(figsize=(6.85, 2.85))
+    plt.figure(figsize=(6.85, 2.85)) #2.85, 4.85
     plt.rcParams['font.family'] = 'Arial'
     plt.rcParams['font.size'] = 12
     
@@ -195,16 +195,18 @@ def plot_paths(data_quad):
                 plt.plot([xs[i], xs[j]], [ys[i], ys[j]], 'k--', linewidth=1.0, alpha=1.0)
 
     # Plot akhir
-    plt.axis('equal')
+    plt.axis('equal') 
     plt.xlim((-7, 25))
     plt.ylim((-3, 7))   
+    # plt.xlim((-10, 10))
+    # plt.ylim((-16, 10))
     # plt.xlim((-7, 15))
     # plt.ylim((-6, 6))
     plt.xlabel('X Position (m)', fontsize=12)
     plt.ylabel('Y Position (m)', fontsize=12)
     # plt.title(f'Swarm Trajectory\nObs: {obstacle_scheme} - Wind: {wind_type} - Contr: {controller_type}\nFormation: {formation_type} - Orient: {orient}', fontsize=12)
     plt.grid()
-    plt.legend(fontsize=10, ncols=3, loc='lower right')
+    plt.legend(fontsize=10, ncols=2, loc='lower right')
     ax = plt.gca()
     textstr = f'Total Time: {t_max:.3f}s'
     ax.text(0.98, 0.90, textstr, transform=ax.transAxes, fontsize=10,
@@ -234,6 +236,9 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
         speed = np.linalg.norm(path[:, 11:14], axis=1)
         line, = ax.plot(time, speed, label=f'Quad {i+1}', color=colors[i % len(colors)], linewidth=1.8)
         quad_handles.append(line)
+    
+    # Mean speed seluruh swarm
+    mean_speed = np.mean([np.linalg.norm(data_quad[i]['path'][:, 11:14], axis=1) for i in range(num_agents)], axis=0)
 
     # --- Tambahkan latar belakang warna per mode ---
     mode_colors = {
@@ -270,10 +275,11 @@ def plot_speed_per_mode(data_quad, data_agent, config, **plot_info):
     # --- Plot settings ---
     ax.set_xlabel('Time (s)', fontsize=12)
     ax.set_ylabel('Speed (m/s)', fontsize=12)
-    # ax.set_title(f'Swarm Speed per Mode\n'
-    #              f'Obs: {plot_info.get("obstacle_scheme", "N/A")}, '
-    #              f'Wind: {plot_info.get("wind_type", "N/A")}, '
-    #              f'Contr: {plot_info.get("controller_type", "N/A")}', fontsize=12)
+    ax.set_title(f'Swarm Speed per Mode\n'
+                 f'Mean Speed: {np.mean(mean_speed):.3f} m/s\n'
+                 f'Obs: {plot_info.get("obstacle_scheme", "N/A")}, '
+                 f'Wind: {plot_info.get("wind_type", "N/A")}, '
+                 f'Contr: {plot_info.get("controller_type", "N/A")}', fontsize=12)
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time[0], time[-1])
     ax.set_ylim(bottom=0)
@@ -697,12 +703,12 @@ def plot_RMSE_total(data_quad, data_agent, topology, config, **plot_info):
 
     ax.set_xlabel('Time (s)', fontsize=12)
     ax.set_ylabel('RMSE (meters)', fontsize=12)
-    # ax.set_title(
-    #     f"Operational Accuracy RMSE by Mode\n"
-    #     f"$\\bf{{\\overline{{RMSE}}_{{total}} = {scalar_rmse:.3f}}}$ meters\n"
-    #     f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, Wind: {plot_info.get('wind_type', 'N/A')}, Contr: {plot_info.get('controller_type', 'N/A')}",
-    #     fontsize=12
-    # )
+    ax.set_title(
+        f"Operational Accuracy RMSE by Mode\n"
+        f"$\\bf{{\\overline{{RMSE}}_{{total}} = {scalar_rmse:.3f}}}$ meters\n"
+        f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, Wind: {plot_info.get('wind_type', 'N/A')}, Contr: {plot_info.get('controller_type', 'N/A')}",
+        fontsize=12
+    )
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time[0], time[-1])
     ax.set_ylim(bottom=-0.1)
@@ -781,14 +787,14 @@ def plot_order_total(data_quad, data_agent, config, **plot_info):
     # Finalize
     ax.set_xlabel("Time (s)", fontsize=12)
     ax.set_ylabel("Order Index ($\\Phi$)", fontsize=12)
-    # ax.set_title(
-    #     f"System Order Index by Mode\n"
-    #     f"$\\bf{{\\overline{{\\Phi}} = {avg_phi:.3f}}}$\n"
-    #     f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, "
-    #     f"Wind: {plot_info.get('wind_type', 'N/A')}, "
-    #     f"Contr: {plot_info.get('controller_type', 'N/A')}",
-    #     fontsize=12
-    # )
+    ax.set_title(
+        f"System Order Index by Mode\n"
+        f"$\\bf{{\\overline{{\\Phi}} = {avg_phi:.3f}}}$\n"
+        f"Obs: {plot_info.get('obstacle_scheme', 'N/A')}, "
+        f"Wind: {plot_info.get('wind_type', 'N/A')}, "
+        f"Contr: {plot_info.get('controller_type', 'N/A')}",
+        fontsize=12
+    )
     ax.grid(True, linestyle='--', alpha=0.6)
     ax.set_xlim(time_order[0], time_order[-1])
     ax.set_ylim(0, 1.05)
@@ -809,26 +815,26 @@ multi_agent_config.set_num_robot(num_robot)
 topology = multi_agent_config.TOPOLOGY
 
 # --- Contoh Cara Pemanggilan Fungsi ---
-# plot_RMSE_total(
-#     data_quad, 
-#     data_agent,
-#     topology, 
-#     multi_agent_config,
-#     obstacle_scheme=obstacle_scheme, 
-#     wind_type=wind_type,
-#     controller_type=controller_type,
-# )
-# plot_order_total(
-#     data_quad, 
-#     data_agent, 
-#     multi_agent_config,
-#     obstacle_scheme=obstacle_scheme, 
-#     wind_type=wind_type, 
-#     controller_type=controller_type
-# )
+plot_RMSE_total(
+    data_quad, 
+    data_agent,
+    topology, 
+    multi_agent_config,
+    obstacle_scheme=obstacle_scheme, 
+    wind_type=wind_type,
+    controller_type=controller_type,
+)
+plot_order_total(
+    data_quad, 
+    data_agent, 
+    multi_agent_config,
+    obstacle_scheme=obstacle_scheme, 
+    wind_type=wind_type, 
+    controller_type=controller_type
+)
 
 
-plot_paths(data_quad)
+# plot_paths(data_quad)
 # plot_formation_error(data_quad)
 # plot_speed_per_mode(
 #     data_quad, 

@@ -325,7 +325,7 @@ def main_multi_agent():
     canvas.fig.canvas.mpl_connect('close_event', on_close)
 
     save_video = multi_agent_config.SAVE_VIDEO  
-    video_filename = f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.mp4"
+    video_filename = f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.mp4"
     video_fps = int(1 / frame_time)
 
     if save_video:
@@ -433,7 +433,7 @@ def main_multi_agent():
 
             iteration += 1
 
-        if (t_now - t_render) >= frame_time and (iteration % 20 == 0):
+        if (t_now - t_render) >= frame_time and (iteration % 100 == 0):
             # Update drawing tiap quadcopter
             for quad in multi_agent.quadcopters:
                 quad.drawer.update_draw(quad.position, quad.quat, label=f'Q{quad.id}')
@@ -443,7 +443,7 @@ def main_multi_agent():
             if save_video:
                 writer.grab_frame()
 
-            plt.pause(0.0001)
+            plt.pause(0.001)
             t_render = t_now
 
     plt.ioff()
@@ -532,8 +532,8 @@ def main_multi_agent():
             })
 
 
-    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.pkl"
-    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_00.pkl"
+    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
+    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
     
     # import pickle
     # with open(file_name_agent, 'wb') as f:
