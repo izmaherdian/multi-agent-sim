@@ -20,7 +20,7 @@ def wayPoints1():
     t_ini = 0
     t = np.array([3, 4, 7, 10])
     
-    wp_ini = np.array([0, 0, 0])
+    wp_ini = np.array([2, 3, -4])
     wp = np.array([[2, 2, -1],
                    [-2, 3, -3],
                    [-2, -1, -3],
@@ -91,7 +91,7 @@ def main():
         init_pos=[0.0, 0.0, 0.0],
         front_color='orange',
         ctrlType="xyz_pos",
-        trajSelect=(0, 0, 0),
+        trajSelect=(0, 3, 0),
         wayPoints=wayPoints1()
     )
     # quad2 = Quadcopter(
@@ -110,6 +110,15 @@ def main():
     dt = 0.005
     fps = 30
     frame_time = 1.0 / fps
+
+    save_video = True
+    video_filename = "Simulation_single_quad.mp4"
+    video_fps = int(1 / frame_time)
+
+    if save_video:
+        metadata = dict(title='Single quad simulation', artist='Matplotlib', comment='Saved simulation')
+        writer = animation.FFMpegWriter(fps=video_fps, metadata=metadata)
+        writer.setup(canvas.fig, video_filename, dpi=100)
 
     running = True
 
@@ -190,12 +199,19 @@ def main():
             # quad2.drawer.update_draw(quad2.position, quad2.quat, label='Q2')
 
             canvas.draw(t=t_sim, quadcopters=[quad1]) # , quad2])
+
+            if save_video:
+                writer.grab_frame()
             
             plt.pause(0.001)
             t_render = t_now
 
     plt.ioff()
     plt.show()
+
+    if save_video:
+        writer.finish()
+        print(f"Video saved to {video_filename}")
 
     # Simpan data ke file
     data_quad_single = []
@@ -549,5 +565,5 @@ def main_multi_agent():
     # print(f"Data saved to {file_name_quad}")
 
 if __name__ == "__main__":
-    # main()
-    main_multi_agent()
+    main()
+    # main_multi_agent()
