@@ -14,6 +14,44 @@ with open(f'single_quad_data.pkl', 'rb') as file:
 print(loaded.keys())
 data = loaded['data_quad_single']
 
+def find_steady_state_time(t, actual, setpoint, tolerance=0.05):
+    """
+    Menghitung waktu steady state (ts) ketika error masuk dalam tolerance dan tetap di sana.
+    
+    Parameters:
+        - t: array waktu
+        - actual: nilai aktual
+        - setpoint: nilai setpoint
+        - tolerance: toleransi (dalam fraksi dari final setpoint, default 5%)
+    
+    Returns:
+        - ts: waktu steady state (atau None jika tidak tercapai)
+    """
+    if len(t) == 0:
+        return None
+    
+    error = setpoint - actual
+    final_sp = setpoint[-1]
+    
+    if np.abs(final_sp) < 1e-6:
+        return None
+    
+    threshold = tolerance * np.abs(final_sp)
+    
+    # Cari indeks pertama kali error masuk dalam tolerance
+    for i in range(len(t)):
+        if np.abs(error[i]) <= threshold:
+            # Verifikasi bahwa error tetap dalam tolerance untuk setidaknya 50 sample berikutnya
+            if i + 50 < len(t):
+                if np.all(np.abs(error[i:i+50]) <= threshold):
+                    return t[i]
+            else:
+                # Jika dekat akhir, cek sisa data
+                if np.all(np.abs(error[i:]) <= threshold):
+                    return t[i]
+    
+    return None
+
 def plot_quad_data(arr_quad):
     """
     Menerima arr_quad (shape: [T,45]) dan membuat serangkaian plot:
@@ -106,18 +144,27 @@ def plot_quad_data(arr_quad):
     # ----------------------------------------------------------
     # 1) Plot Posisi Aktual vs Setpoint
     # ----------------------------------------------------------
-    plt.figure(figsize=(8, 5))
-    plt.plot(t, x,  label='x')
-    plt.plot(t, y,  label='y')
-    plt.plot(t, z,  label='z')
-    plt.plot(t, x_sp, '--', label='x_sp')
-    plt.plot(t, y_sp, '--', label='y_sp')
-    plt.plot(t, z_sp, '--', label='z_sp')
-    plt.grid(True)
-    plt.legend(loc='upper right')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Position (m)')
-    plt.title(f'{judul_prefix}Posisi Aktual vs Setpoint')
+    fig, ax = plt.subplots(figsize=(6.85, 2.85))
+    ax.plot(t, x,  label='x')
+    ax.plot(t, y,  label='y')
+    ax.plot(t, z,  label='z')
+    ax.plot(t, x_sp, '--', label='x_sp')
+    ax.plot(t, y_sp, '--', label='y_sp')
+    ax.plot(t, z_sp, '--', label='z_sp')
+    
+    # Hitung dan tampilkan ts untuk posisi z
+    ts_pos = find_steady_state_time(t, z, z_sp, tolerance=0.01)
+    if ts_pos is not None:
+        ax.axvline(x=ts_pos, color='red', linestyle=':', linewidth=2, alpha=0.7, label=f'ts={ts_pos:.2f}s')
+        y_pos = -1.0
+        ax.text(ts_pos, y_pos, f'ts={ts_pos:.2f}s', fontsize=12, color='red', fontweight='bold', 
+                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    
+    ax.grid(True)
+    ax.legend(loc='upper right')
+    ax.set_xlabel('Time (seconds)')
+    ax.set_ylabel('Position (m)')
+    ax.set_title(f'{judul_prefix} - Actual vs Setpoint Position')
     plt.tight_layout()
 
     # ----------------------------------------------------------
@@ -222,15 +269,24 @@ def plot_quad_data(arr_quad):
     # ----------------------------------------------------------
     # 7) Plot Error Posisi (x_err, y_err, z_err)
     # ----------------------------------------------------------
-    plt.figure(figsize=(8, 4))
-    plt.plot(t, x_err, label='Pos x error')
-    plt.plot(t, y_err, label='Pos y error')
-    plt.plot(t, z_err, label='Pos z error')
-    plt.grid(True)
-    plt.legend(loc='upper right')
-    plt.xlabel('Time (s)')
-    plt.ylabel('Position Error (m)')
-    plt.title(f'{judul_prefix}Error Posisi')
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot(t, x_err, label='Pos x error')
+    ax.plot(t, y_err, label='Pos y error')
+    ax.plot(t, z_err, label='Pos z error')
+    
+    # Hitung dan tampilkan ts untuk error posisi z
+    ts_err = find_steady_state_time(t, z, z_sp, tolerance=0.01)
+    if ts_err is not None:
+        ax.axvline(x=ts_err, color='red', linestyle=':', linewidth=2, alpha=0.7, label=f'ts={ts_err:.2f}s')
+        y_pos = -1.0
+        ax.text(ts_err, y_pos, f'ts={ts_err:.2f}s', fontsize=12, color='red', fontweight='bold', 
+                bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
+    
+    ax.grid(True)
+    ax.legend(loc='lower right')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Position Error (m)')
+    ax.set_title(f'{judul_prefix} - Position Error (Setpoint - Actual)')
     plt.tight_layout()
 
     # ----------------------------------------------------------

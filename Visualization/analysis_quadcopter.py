@@ -12,9 +12,9 @@ from Agent.QuadMultiAgent import QuadMultiAgent
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME
-obstacle_scheme = 'scheme2'
+obstacle_scheme = 'NONE'
 # wind_type       = multi_agent_config.WIND_TYPE
-wind_type       = 'GUST'
+wind_type       = 'NONE'
 # controller_type = multi_agent_config.CONTROLLER
 controller_type = 'erc'  
 # formation_type  = multi_agent_config.FORMATION_TYPE

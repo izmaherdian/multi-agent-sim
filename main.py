@@ -20,7 +20,7 @@ def wayPoints1():
     t_ini = 0
     t = np.array([3, 4, 7, 10])
     
-    wp_ini = np.array([2, 3, -4])
+    wp_ini = np.array([0, 0, -2])
     wp = np.array([[2, 2, -1],
                    [-2, 3, -3],
                    [-2, -1, -3],
