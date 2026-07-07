@@ -1,0 +1,18 @@
+TY  - JOUR
+AU  - Herdian, Izma Alhazmi
+AU  - Ekawati, Estiyanti
+AU  - Mukhlish, Faqihza
+AU  - Prabaswara, Pramoda
+PY  - 2026
+DA  - 2026/06/04
+TI  - Decentralized formation control system design for swarm quadcopters using an improved artificial potential field and event-based reconfiguration control
+JO  - Journal of King Saud University – Engineering Sciences
+SP  - 41
+VL  - 38
+IS  - 5
+AB  - This paper presents a decentralized formation control system for a swarm of quadcopters that combines an improved artificial potential field (IAPF) with an event-based reconfiguration control (ERC) mechanism to enable safe navigation in cluttered and constrained environments. The framework is implemented in a hierarchical architecture, where a swarm-level planner generates position setpoints and a low-level cascaded PID controller stabilizes each vehicle. To support practical 3D missions, the planner is extended with autonomous takeoff logic, dynamic 3D goal/waypoint navigation, nonlinear trajectory tracking, and a formation-orientation mechanism that aligns the topology with the direction of motion. High-fidelity simulations with a five-agent swarm demonstrate that ERC preserves nominal performance in a baseline obstacle field while significantly improving feasibility in narrow passages, where the static IAPF strategy fails. In the narrow-gap scenario, ERC completes the mission in 59.735 s with $$\overline{RMSE}_{\textrm{total}}=0.692$$m and $$\overline{\Phi}=0.878$$, and it maintains mission success under periodic wind gusts with nearly unchanged traversal time and improved aggregate coordination metrics ($$\overline{RMSE}_{\textrm{total}}=0.694$$m, $$\overline{\Phi}=0.925$$). A U-shaped trap case highlights a limitation of purely reactive planners, while waypoint and circular-tracking scenarios validate the proposed extensions for complex navigation tasks.
+SN  - 2213-1558
+UR  - https://doi.org/10.1007/s44444-026-00111-4
+DO  - 10.1007/s44444-026-00111-4
+ID  - Herdian2026
+ER  - 

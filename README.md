@@ -275,3 +275,28 @@ Use the scripts in the [Visualization/](file:///run/media/izmaherdian/Windows-SS
 *   [analysis_for_report.py](file:///run/media/izmaherdian/Windows-SSD/Izma_S2_InstrumentasiKontrol_ITB/Akademik/Project%20S1/MultiAgentSim/Visualization/analysis_for_report.py): Generates comparison plots for RMSE, Regularity Index ($\Phi$), velocities, and scale factors.
 *   [analysis_quadcopter.py](file:///run/media/izmaherdian/Windows-SSD/Izma_S2_InstrumentasiKontrol_ITB/Akademik/Project%20S1/MultiAgentSim/Visualization/analysis_quadcopter.py): Plots quadcopter physical responses (Euler angles, body angular rates, and motor speed).
 *   [generate_plots.py](file:///run/media/izmaherdian/Windows-SSD/Izma_S2_InstrumentasiKontrol_ITB/Akademik/Project%20S1/MultiAgentSim/Visualization/generate_plots.py): Generates the specific result plots embedded in this README.
+
+---
+
+## 9. Citation
+
+If you find this simulation codebase or the methodology useful in your academic research, please cite our corresponding journal paper:
+
+### Plain Text
+Herdian, I. A., Ekawati, E., Mukhlish, F., & Prabaswara, P. (2026). Decentralized formation control system design for swarm quadcopters using an improved artificial potential field and event-based reconfiguration control. *Journal of King Saud University – Engineering Sciences*, 38(5), 41. https://doi.org/10.1007/s44444-026-00111-4
+
+### BibTeX
+```bibtex
+@article{Herdian2026,
+  author    = {Herdian, Izma Alhazmi and Ekawati, Estiyanti and Mukhlish, Faqihza and Prabaswara, Pramoda},
+  title     = {Decentralized formation control system design for swarm quadcopters using an improved artificial potential field and event-based reconfiguration control},
+  journal   = {Journal of King Saud University -- Engineering Sciences},
+  volume    = {38},
+  number    = {5},
+  pages     = {41},
+  year      = {2026},
+  doi       = {10.1007/s44444-026-00111-4},
+  url       = {https://doi.org/10.1007/s44444-026-00111-4}
+}
+```
+
