@@ -1,0 +1,20 @@
+# Python caches
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Simulation results / data logs
+*.pkl
+*.csv
+*.xlsx
+
+# Media output
+*.mp4
+
+# Temp files
+~$*.xlsx
+.DS_Store
+
+# VS Code configs
+.vscode/
