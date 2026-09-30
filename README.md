@@ -132,6 +132,7 @@ At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` f
 ├── Environment/      obstacles, wind model, 3D animation canvas
 ├── Visualization/    analysis & plotting scripts
 ├── main.py           simulation entry point
+├── scratch/          early prototype scripts (not needed to run the simulator)
 ├── paper/latex/      LaTeX source + figures of the journal paper
 └── docs/
     ├── paper/        published paper (PDF) + citation (.ris)
@@ -159,7 +160,7 @@ At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` f
 }
 ```
 
-A RIS file is available at [`docs/paper/10.1007_s44444-026-00111-4-citation.ris`](docs/paper/10.1007_s44444-026-00111-4-citation.ris).
+A RIS file is available at [`docs/paper/Herdian2026_citation.ris`](docs/paper/Herdian2026_citation.ris).
 
 ## 📜 License
 
