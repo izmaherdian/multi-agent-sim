@@ -123,7 +123,7 @@ Configure the run in [`agent/config.py`](agent/config.py):
 | `WIND_TYPE` | `'NONE'`, `'FIXED'`, `'GUST'` |
 | `PATH_TYPE` | `'goal'`, `'multi-goal'` (waypoints), `'circular'` |
 
-At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` for the swarm (the default `main()` runs a single quadcopter). Logs (`*.pkl`) and videos (`*.mp4`) are saved to the project root. Post-process them with the scripts in [`visualization/`](visualization/), e.g. `plot_paper_figures.py`.
+At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` for the swarm (the default `main()` runs a single quadcopter). Logs (`*.pkl`) and videos (`*.mp4`) are saved to `results/data/` and `results/videos/` (git-ignored). Post-process them with the scripts in [`visualization/`](visualization/), e.g. `plot_paper_figures.py`.
 
 ## 📁 Repository Structure
 

@@ -413,19 +413,19 @@ def main():
     workspace_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     print("Loading ERC Scheme 2 None...")
-    with open(os.path.join(workspace_dir, 'multi_quad_data_scheme2_NONE_erc_formation1_NED.pkl'), 'rb') as f:
+    with open(os.path.join(workspace_dir, 'results', 'data', 'multi_quad_data_scheme2_NONE_erc_formation1_NED.pkl'), 'rb') as f:
         erc_none_quad = pickle.load(f)['data_quad']
-    with open(os.path.join(workspace_dir, 'multi_agent_data_scheme2_NONE_erc_formation1_NED.pkl'), 'rb') as f:
+    with open(os.path.join(workspace_dir, 'results', 'data', 'multi_agent_data_scheme2_NONE_erc_formation1_NED.pkl'), 'rb') as f:
         erc_none_agent = pickle.load(f)['data_agent']
         
     print("Loading IAPF Scheme 2 None...")
-    with open(os.path.join(workspace_dir, 'multi_quad_data_scheme2_NONE_iapf_formation1_NED.pkl'), 'rb') as f:
+    with open(os.path.join(workspace_dir, 'results', 'data', 'multi_quad_data_scheme2_NONE_iapf_formation1_NED.pkl'), 'rb') as f:
         iapf_none_quad = pickle.load(f)['data_quad']
-    with open(os.path.join(workspace_dir, 'multi_agent_data_scheme2_NONE_iapf_formation1_NED.pkl'), 'rb') as f:
+    with open(os.path.join(workspace_dir, 'results', 'data', 'multi_agent_data_scheme2_NONE_iapf_formation1_NED.pkl'), 'rb') as f:
         iapf_none_agent = pickle.load(f)['data_agent']
         
     print("Loading ERC Scheme 2 Gust...")
-    with open(os.path.join(workspace_dir, 'multi_quad_data_scheme2_GUST_erc_formation1_NED.pkl'), 'rb') as f:
+    with open(os.path.join(workspace_dir, 'results', 'data', 'multi_quad_data_scheme2_GUST_erc_formation1_NED.pkl'), 'rb') as f:
         erc_gust_quad = pickle.load(f)['data_quad']
     
     print("Generating Trajectory Plots...")

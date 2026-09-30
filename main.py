@@ -1,3 +1,4 @@
+import os
 import time
 
 import numpy as np
@@ -10,6 +11,10 @@ from agent.config import MultiAgentConfig
 from environment.canvas import Canvas
 
 from mpl_toolkits.mplot3d import Axes3D
+
+# Simulation outputs (logs & videos) are stored under results/
+os.makedirs(os.path.join("results", "data"), exist_ok=True)
+os.makedirs(os.path.join("results", "videos"), exist_ok=True)
 
 deg2rad = np.pi / 180.0
 
@@ -112,7 +117,7 @@ def main():
     frame_time = 1.0 / fps
 
     save_video = True
-    video_filename = "Simulation_single_quad.mp4"
+    video_filename = os.path.join("results", "videos", "Simulation_single_quad.mp4")
     video_fps = int(1 / frame_time)
 
     if save_video:
@@ -269,7 +274,7 @@ def main():
         }
     )
 
-    file_name_quad = "single_quad_data.pkl"
+    file_name_quad = os.path.join("results", "data", "single_quad_data.pkl")
 
     import pickle
     with open(file_name_quad, 'wb') as f:
@@ -341,7 +346,7 @@ def main_multi_agent():
     canvas.fig.canvas.mpl_connect('close_event', on_close)
 
     save_video = multi_agent_config.SAVE_VIDEO  
-    video_filename = f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.mp4"
+    video_filename = os.path.join("results", "videos", f"Simulation_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.mp4")
     video_fps = int(1 / frame_time)
 
     if save_video:
@@ -548,8 +553,8 @@ def main_multi_agent():
             })
 
 
-    # file_name_agent = f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
-    # file_name_quad = f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
+    # file_name_agent = "results/data/" + f"multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
+    # file_name_quad = "results/data/" + f"multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}_erc_scheme1.pkl"
     
     # import pickle
     # with open(file_name_agent, 'wb') as f:

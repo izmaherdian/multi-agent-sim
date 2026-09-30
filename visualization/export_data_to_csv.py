@@ -330,12 +330,12 @@ def pkl_merge_agent_quad_by_time_to_csv(agent_pkl_path, quad_pkl_path, output_cs
 
 
 if __name__ == "__main__":
-	input_file = "multi_agent_data_scheme2_GUST_erc_formation1_NED.pkl"
+	input_file = "results/data/multi_agent_data_scheme2_GUST_erc_formation1_NED.pkl"
 	output_file = pkl_multi_agent_to_csv(input_file)
 	print(f"Berhasil konversi: {input_file} -> {output_file}")
 
 	# Contoh gabung dua PKL berdasarkan time (t)
-	agent_file = "multi_agent_data_scheme2_GUST_erc_formation1_NED.pkl"
-	quad_file = "multi_quad_data_scheme2_GUST_erc_formation1_NED.pkl"
+	agent_file = "results/data/multi_agent_data_scheme2_GUST_erc_formation1_NED.pkl"
+	quad_file = "results/data/multi_quad_data_scheme2_GUST_erc_formation1_NED.pkl"
 	merged_file = pkl_merge_agent_quad_by_time_to_csv(agent_file, quad_file)
 	print(f"Berhasil gabung: {agent_file} + {quad_file} -> {merged_file}")

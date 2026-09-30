@@ -21,12 +21,12 @@ controller_type = 'erc'
 formation_type  = 1
 orient          = multi_agent_config.ORIENT
 
-with open(f'multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
+with open(f'results/data/multi_quad_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
     loaded = pickle.load(file)
 print(loaded.keys())
 data_quad = loaded['data_quad']
 
-with open(f'multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
+with open(f'results/data/multi_agent_data_{obstacle_scheme}_{wind_type}_{controller_type}_formation{formation_type}_{orient}.pkl', 'rb') as file:
     loaded = pickle.load(file)
 print(loaded.keys())
 data_agent = loaded['data_agent']

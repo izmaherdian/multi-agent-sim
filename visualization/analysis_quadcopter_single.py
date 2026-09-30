@@ -9,7 +9,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from agent.config import MultiAgentConfig
 from environment.obstacles import Obstacles
 
-with open(f'single_quad_data.pkl', 'rb') as file:
+with open(f'results/data/single_quad_data.pkl', 'rb') as file:
     loaded = pickle.load(file)
 print(loaded.keys())
 data = loaded['data_quad_single']
