@@ -2,7 +2,7 @@ import numpy as np
 from numpy import pi
 from numpy.linalg import norm
 
-from Environment.Obstacles import Obstacles
+from environment.obstacles import Obstacles
 
 deg2rad = np.pi / 180.0
 

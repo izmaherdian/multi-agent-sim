@@ -114,7 +114,7 @@ pip install numpy==1.26.4 scipy==1.15.2 sympy==1.13.3 matplotlib==3.9.4
 python main.py
 ```
 
-Configure the run in [`Agent/MultiAgentConfig.py`](Agent/MultiAgentConfig.py):
+Configure the run in [`agent/config.py`](agent/config.py):
 
 | Setting | Options |
 |:--|:--|
@@ -123,14 +123,14 @@ Configure the run in [`Agent/MultiAgentConfig.py`](Agent/MultiAgentConfig.py):
 | `WIND_TYPE` | `'NONE'`, `'FIXED'`, `'GUST'` |
 | `PATH_TYPE` | `'goal'`, `'multi-goal'` (waypoints), `'circular'` |
 
-At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` for the swarm (the default `main()` runs a single quadcopter). Logs (`*.pkl`) and videos (`*.mp4`) are saved to the project root. Post-process them with the scripts in [`Visualization/`](Visualization/), e.g. `analysis_for_report.py`.
+At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` for the swarm (the default `main()` runs a single quadcopter). Logs (`*.pkl`) and videos (`*.mp4`) are saved to the project root. Post-process them with the scripts in [`visualization/`](visualization/), e.g. `plot_paper_figures.py`.
 
 ## 📁 Repository Structure
 
 ```
-├── Agent/            quadcopter model, cascaded PID, IAPF & ERC planners, config
-├── Environment/      obstacles, wind model, 3D animation canvas
-├── Visualization/    analysis & plotting scripts
+├── agent/            quadcopter model, cascaded PID, IAPF & ERC planners, config
+├── environment/      obstacles, wind model, 3D animation canvas
+├── visualization/    analysis & plotting scripts
 ├── main.py           simulation entry point
 ├── scratch/          early prototype scripts (not needed to run the simulator)
 ├── paper/latex/      LaTeX source + figures of the journal paper
@@ -143,7 +143,7 @@ At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` f
 
 ## 📄 Publication & Citation
 
-📑 **[Read the paper (PDF)](docs/paper/Herdian2026_JKSU-ES.pdf)** · [Publisher page](https://doi.org/10.1007/s44444-026-00111-4) · [LaTeX source](paper/latex/) · [Thesis report](docs/thesis/)
+📑 **[Read the paper (PDF)](docs/paper/herdian2026_jksu-es.pdf)** · [Publisher page](https://doi.org/10.1007/s44444-026-00111-4) · [LaTeX source](paper/latex/) · [Thesis report](docs/thesis/)
 
 > I. A. Herdian, E. Ekawati, F. Mukhlish, P. Prabaswara, "Decentralized formation control system design for swarm quadcopters using an improved artificial potential field and event-based reconfiguration control," *Journal of King Saud University – Engineering Sciences*, 38(5), 41 (2026).
 
@@ -160,7 +160,7 @@ At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` f
 }
 ```
 
-A RIS file is available at [`docs/paper/Herdian2026_citation.ris`](docs/paper/Herdian2026_citation.ris).
+A RIS file is available at [`docs/paper/herdian2026_citation.ris`](docs/paper/herdian2026_citation.ris).
 
 ## 📜 License
 

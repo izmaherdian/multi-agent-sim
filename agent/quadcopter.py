@@ -1,11 +1,11 @@
 import numpy as np
 
-from Agent.QuadDrawer import QuadDrawer
-from Agent.QuadDynamics import QuadDynamics
-from Agent.QuadControl import QuadControl
-from Agent.QuadTrajectory import QuadTrajectory
+from agent.quad_drawer import QuadDrawer
+from agent.quad_dynamics import QuadDynamics
+from agent.quad_control import QuadControl
+from agent.quad_trajectory import QuadTrajectory
 
-from Agent.QuadUtils.rotationConversion import quatToYPR_ZYX
+from agent.utils.rotation_conversion import quatToYPR_ZYX
 
 rad2deg = 180.0 / np.pi
 rads2rpm = 60.0 / (2.0 * np.pi)

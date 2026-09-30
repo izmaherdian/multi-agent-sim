@@ -1,9 +1,9 @@
 import numpy as np
 
-from Agent.Quadcopter import Quadcopter
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Agent.MultiAgentUtils import nearest_point_to_obstacle
-from Environment.Obstacles import Obstacles
+from agent.quadcopter import Quadcopter
+from agent.config import MultiAgentConfig
+from agent.planner_utils import nearest_point_to_obstacle
+from environment.obstacles import Obstacles
 
 class QuadMultiAgent:
     def __init__(self, ax, agents_config, obstacle_scheme='scheme1'):
@@ -38,9 +38,9 @@ class QuadMultiAgent:
         self.agents = []
         for i in range(self.num_robot):
             if self.multi_agent_config.CONTROLLER == 'iapf':
-                from Agent.MultiAgentIAPF import MultiAgentMethod
+                from agent.planner_iapf import MultiAgentMethod
             elif self.multi_agent_config.CONTROLLER == 'erc':
-                from Agent.MultiAgentERC import MultiAgentMethod
+                from agent.planner_erc import MultiAgentMethod
 
             agent = MultiAgentMethod(
                 index=i,

@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 from enum import Enum
-from Agent.MultiAgentUtils import nearest_point_to_obstacle
+from agent.planner_utils import nearest_point_to_obstacle
 
 class Mode(Enum):
     TAKEOFF = -1

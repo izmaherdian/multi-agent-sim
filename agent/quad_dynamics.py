@@ -4,7 +4,7 @@ from numpy import pi, sign, sin, cos, arctan2, arcsin
 from numpy.linalg import inv
 from scipy.integrate import ode
 
-from Agent.QuadUtils.rotationConversion import YPRToQuat, quat2Dcm, quatToYPR_ZYX
+from agent.utils.rotation_conversion import YPRToQuat, quat2Dcm, quatToYPR_ZYX
 
 
 orient = "NED"

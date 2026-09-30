@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 
-from Agent.Quadcopter import Quadcopter
-from Agent.QuadMultiAgent import QuadMultiAgent
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Environment.Canvas import Canvas
+from agent.quadcopter import Quadcopter
+from agent.swarm import QuadMultiAgent
+from agent.config import MultiAgentConfig
+from environment.canvas import Canvas
 
 from mpl_toolkits.mplot3d import Axes3D
 

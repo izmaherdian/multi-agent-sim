@@ -6,8 +6,8 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Environment.Obstacles import Obstacles
+from agent.config import MultiAgentConfig
+from environment.obstacles import Obstacles
 
 multi_agent_config = MultiAgentConfig()
 # obstacle_scheme = multi_agent_config.OBSTACLE_SCHEME

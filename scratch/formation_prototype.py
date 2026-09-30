@@ -4,7 +4,7 @@ from enum import Enum
 # import pickle # Tidak diperlukan lagi
 
 # --- Import dari file Anda yang lain ---
-from Environment.Obstacles import Obstacles # Asumsikan Obstacles.py ada di direktori yang sama atau dapat diakses
+from environment.obstacles import Obstacles # Asumsikan Obstacles.py ada di direktori yang sama atau dapat diakses
 
 # Fungsi bantuan untuk mendapatkan data agents_config yang mirip dengan main.py
 def get_main_agents_config():

@@ -10,8 +10,8 @@ import matplotlib.patches as mpatches
 
 # Add parent directory to path to import Config
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Environment.Obstacles import Obstacles
+from agent.config import MultiAgentConfig
+from environment.obstacles import Obstacles
 
 def get_circle(x, y, r):
     theta = np.linspace(0, 2*np.pi, 100)

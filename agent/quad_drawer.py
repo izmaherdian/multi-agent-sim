@@ -1,7 +1,7 @@
 import numpy as np
 
-from Agent.QuadDynamics import sys_params 
-from Agent.QuadUtils.rotationConversion import quat2Dcm
+from agent.quad_dynamics import sys_params 
+from agent.utils.rotation_conversion import quat2Dcm
 
 sys_params = sys_params()
 dxm = sys_params['dxm']

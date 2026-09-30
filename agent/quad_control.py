@@ -4,10 +4,10 @@ from numpy import pi
 from numpy import sin, cos, tan, sqrt
 from numpy.linalg import norm
 
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Agent.QuadUtils.mixer import mixerFM
-from Agent.QuadUtils.rotationConversion import RotToQuat, quat2Dcm
-from Agent.QuadUtils.quaternionFunctions import quatMultiply, inverse, vectNormalize
+from agent.config import MultiAgentConfig
+from agent.utils.mixer import mixerFM
+from agent.utils.rotation_conversion import RotToQuat, quat2Dcm
+from agent.utils.quaternion_functions import quatMultiply, inverse, vectNormalize
 
 rad2deg = 180.0/pi
 deg2rad = pi/180.0

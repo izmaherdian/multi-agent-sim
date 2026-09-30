@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from Environment.Obstacles import Obstacles
-from Environment.Wind import Wind
+from environment.obstacles import Obstacles
+from environment.wind import Wind
 
 class Canvas:
     def __init__(self, obstacle_scheme='scheme1', wind_type='SINE', controller_type='erc', formation_type=2, orient="NED"):

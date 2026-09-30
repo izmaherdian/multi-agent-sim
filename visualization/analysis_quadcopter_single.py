@@ -6,8 +6,8 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from Agent.MultiAgentConfig import MultiAgentConfig
-from Environment.Obstacles import Obstacles
+from agent.config import MultiAgentConfig
+from environment.obstacles import Obstacles
 
 with open(f'single_quad_data.pkl', 'rb') as file:
     loaded = pickle.load(file)
