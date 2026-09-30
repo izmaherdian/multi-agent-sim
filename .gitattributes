@@ -1,0 +1,3 @@
+# Store all files exactly as-is: no line-ending conversion on any OS.
+# The repo lives on a drive shared between Windows and Linux.
+* -text
