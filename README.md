@@ -10,6 +10,7 @@
   <a href="https://doi.org/10.1007/s44444-026-00111-4"><img src="https://img.shields.io/badge/DOI-10.1007%2Fs44444--026--00111--4-blue" alt="DOI"></a>
   <a href="https://youtube.com/playlist?list=PLDnYn768_7b8L7e5SkQXCjXeL2ngwJcWW"><img src="https://img.shields.io/badge/YouTube-Simulation%20Videos-red?logo=youtube&logoColor=white" alt="YouTube"></a>
   <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="MIT License"></a>
 </p>
 
 <p align="center">
@@ -159,5 +160,9 @@ At the bottom of [`main.py`](main.py), switch the call to `main_multi_agent()` f
 ```
 
 A RIS file is available at [`docs/paper/10.1007_s44444-026-00111-4-citation.ris`](docs/paper/10.1007_s44444-026-00111-4-citation.ris).
+
+## 📜 License
+
+The source code is released under the [MIT License](LICENSE). The paper, thesis and figures in `docs/` and `paper/` remain under their respective copyrights (the published paper is open access under its publisher's license).
 
 <p align="center"><sub>Engineering Physics, Institut Teknologi Bandung</sub></p>
